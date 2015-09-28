@@ -39,6 +39,10 @@
                         {
                             "xml": "<feature name=\"PushbotsPlugin\"><param name=\"ios-package\" value=\"PushbotsPlugin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"CarrierPlugin\"><param name=\"ios-package\" value=\"CarrierPlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -47,6 +51,9 @@
     },
     "installed_plugins": {
         "com.pushbots.push": {
+            "PACKAGE_NAME": "com.romankuepper.comfortist"
+        },
+        "com.cordovaprogramming.carrier": {
             "PACKAGE_NAME": "com.romankuepper.comfortist"
         }
     },

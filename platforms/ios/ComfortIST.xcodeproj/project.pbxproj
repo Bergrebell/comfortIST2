@@ -45,6 +45,7 @@
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		D6A72004F7FF4BCAAA6B0C4B /* PushbotsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AEC65D8623489AA8C3E036 /* PushbotsPlugin.m */; };
 		E35B4F42CA4C4164BAA2EF2D /* Pushbots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8163601A89944C0AA46EF394 /* Pushbots.framework */; };
+		F94B9EF3D4574A1B834CBDFD /* CarrierPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8DAFC5B77343DDA601CC25 /* CarrierPlugin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,8 @@
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ComfortIST/config.xml; sourceTree = "<group>"; };
+		6B8DAFC5B77343DDA601CC25 /* CarrierPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CarrierPlugin.m"; path = "com.cordovaprogramming.carrier/CarrierPlugin.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		59764BCCA7734CEE8DD5946A /* CarrierPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CarrierPlugin.h"; path = "com.cordovaprogramming.carrier/CarrierPlugin.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +229,8 @@
 				D4AEC65D8623489AA8C3E036 /* PushbotsPlugin.m */,
 				75DD9AEC8556426F9E908D7A /* PushbotsDelegate.h */,
 				D40E3D09B62B46D0ADFDD390 /* PushbotsPlugin.h */,
+				6B8DAFC5B77343DDA601CC25 /* CarrierPlugin.m */,
+				59764BCCA7734CEE8DD5946A /* CarrierPlugin.h */,
 			);
 			name = Plugins;
 			path = ComfortIST/Plugins;
@@ -412,6 +417,7 @@
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				C909B7CA325A4C55A8943890 /* PushbotsDelegate.m in Sources */,
 				D6A72004F7FF4BCAAA6B0C4B /* PushbotsPlugin.m in Sources */,
+				F94B9EF3D4574A1B834CBDFD /* CarrierPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

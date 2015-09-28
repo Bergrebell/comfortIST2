@@ -6,12 +6,20 @@ module.exports = [
         "clobbers": [
             "PushbotsPlugin"
         ]
+    },
+    {
+        "file": "plugins/com.cordovaprogramming.carrier/carrier.js",
+        "id": "com.cordovaprogramming.carrier.carrier",
+        "clobbers": [
+            "carrier"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "com.pushbots.push": "1.2.7"
+    "com.pushbots.push": "1.2.7",
+    "com.cordovaprogramming.carrier": "1.0.2"
 }
 // BOTTOM OF METADATA
 });

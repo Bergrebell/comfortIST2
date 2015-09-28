@@ -7,7 +7,7 @@
     // This method will be called everytime you open the app
     // Register the deviceToken on Pushbots
     [[Pushbots sharedInstance] registerOnPushbots:deviceToken];
-	NSLog(@"Registered token is %@", deviceToken);
+	NSLog(@"Registered token issssssssssssssss %@", deviceToken);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
