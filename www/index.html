@@ -1,57 +1,117 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
-
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        
-        <title>Hello World</title>
-    </head>
-    <body>
-    
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        
-        
-        
         
         <script type="text/javascript" src="cordova.js"></script>
+        <!-- for connection to db via mosquito -->
+        <script src="js/mqttws31.js" type="text/javascript"></script>
+        <script src="js/mosquitto.js" type="text/javascript"></script>
+        
+        <!--<script type="text/javascript" src="js/index.js"></script>-->
+
+
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <!-- Javascript, Jquery & Jquery mobile directories in the head bc otherwise short flash without jqm css-->
+        <script type="text/javascript" charset="utf-8">
+            var testData = { "a": "b", "c": "d" };
+            
+            var globalData = {};
+
+            
+            function doSomething1() {
+                carrier.getAverageNoise(onSuccess2, onFailure);
+            }
+            
+            function doSomething2() {
+                carrier.getLuminosity(onSuccess2, onFailure);
+            }
+            
+            
+            function onSuccess2(result) {
+                var resStr = "Result: " + result;
+                console.log(resStr);
+                alert(resStr);
+            }
+            
+            function onFailure(err) {
+                console.log("onFailure: " + JSON.stringify(err));
+                alert("Failure: " + err);
+            }
+        
+        </script>
+
+
+
+        <title>comfortIST</title>
+    </head>
+
+    <body>
+
+        <div id="page1">
+            <div id="formScales">
+                <div class="formContent" id="noise">
+                    <p>Noise</p>
+                    <input type="button" id="nbtn1" value="Noisy" val="5"/>
+                    <input type="button" id="nbtn2" value="Medium noisy" val="4"/>
+                    <input class="active" type="button" id="nbtn3" value="Neutral" val="3"/>
+                    <input type="button" id="nbtn4" value="Medium silent" val="2"/>
+                    <input type="button" id="nbtn5" value="Silent" val="1"/>
+                </div>
+
+                <div class="formContent" id="lighting">
+                    <p>Lighting</p>
+                    <input type="button" id="lbtn1" value="Bright" val="5"/>
+                    <input type="button" id="lbtn2" value="Medium bright" val="4"/>
+                    <input class="active" type="button" id="lbtn3" value="Neutral" val="3"/>
+                    <input type="button" id="lbtn4" value="Medium dark" val="2"/>
+                    <input type="button" id="lbtn5" value="Dark" val="1"/>
+                </div>
+
+                <div class="formContent" id="temp">
+                    <p>Temperature</p>
+                    <input type="button" id="tbtn1" value="Cold" temp="test" val="1"/>
+                    <input type="button" id="tbtn2" value="Cool" val="2"/>
+                    <input type="button" id="tbtn3" value="Slightly cool" val="3"/>
+                    <input class="active" type="button" id="tbtn4" value="Neutral" val="4"/>
+                    <input type="button" id="tbtn5" value="Slightly warm" val="5"/>
+                    <input type="button" id="tbtn6" value="Warm" val="6"/>
+                    <input type="button" id="tbtn7" value="Hot" val="7"/>
+
+                </div>
+            </div>
+
+            <div id="activity">
+                <p>Activities</p>
+                <input class="activityBtn" type="button" id="btn16" value="Reading" val="reading"/>
+                <input class="activityBtn active" type="button" id="btn17" value="On Computer" val="computer"/>
+                <input class="activityBtn" type="button" id="btn18" value="In Meeting" val="meeting"/>
+                <input class="activityBtn" type="button" id="btn19" value="Moving" val="moving"/>
+                <input class="activityBtn" type="button" id="btn20" value="Other" val="other"/>
+            </div>
+
+                <input type="submit" class="submitButton" value="Submit"/>
+        </div>
+
+
+
+
+
+
+
+
         <script type="text/javascript" src="js/index.js"></script>
+
+        <!-- Start init - Even if the console says different - needed to initialize the js! Otherwise form gets sent via html instead of ajax! -->
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+        <!-- End init -->
     </body>
 </html>
