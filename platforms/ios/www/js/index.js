@@ -29,22 +29,40 @@ function onResume() {
 
 
 $(document).ready(function() {
+//document.addEventListener("deviceready", function(){
     // establish mqtt connection to server
     initClient();
     
-    $( document ).bind( "mobileinit", function() {
+    /*$( document ).bind( "mobileinit", function() {
         // Make jQuery Mobile framework configuration changes here
         $.support.cors = true;
         $.mobile.allowCrossDomainPages = true;
+    });*/
+    
+    // *** start set active states ***
+    
+    var noiseLastState = window.localStorage.getItem('noise'); // => 1-5
+    var lightLastState = window.localStorage.getItem('lighting'); // => 1-5
+    var tempLastState = window.localStorage.getItem('temp'); // => 1-7
+    var activityLastState = window.localStorage.getItem('activity'); // => Moving,...
+    
+    
+    $(function() {
+      $('#noise > input[val="'+noiseLastState+'"]').addClass('active');
+      $('#lighting > input[val="'+lightLastState+'"]').addClass('active');
+      $('#temp > input[val="'+tempLastState+'"]').addClass('active');
+      $('#activity > input[val="'+activityLastState+'"]').addClass('active');
     });
     
+    // *** end set active states ***
     
     
-// *** start setup for data sending ***
+    
+    // *** start setup for data sending ***
     function addToGlobal(name, value) {
                   globalData[name] = value;
     };
-// *** end setup for data sending ***
+    // *** end setup for data sending ***
 
 // *** start check for first app launch ***
     var applaunchCount = window.localStorage.getItem('launchCount5');
@@ -91,253 +109,269 @@ $(document).ready(function() {
     }
 // *** end check for first app launch ***
 
+// *** start read out activity states ***
+    // *** start temp form ***
+    $('#temp > input[type="button"]').click(function(){
+        console.log("a temp button pressed");
+        event.preventDefault();
 
-// *** start temp form ***
-$('#temp > input[type="button"]').click(function(){
-	console.log("a temp button pressed");
-	event.preventDefault();
-
-    $('#temp input[type="button"].active').removeClass('active');
-        $(this).addClass('active');
-});
-// ** end temp form ***
-
-
-
-// *** start lighting form ***
-$('#lighting > input[type="button"]').click(function(){
-	console.log("a lighting button pressed");
-	event.preventDefault();
-
-    $('#lighting input[type="button"].active').removeClass('active');
-        $(this).addClass('active');
-});
-// *** end lighting form ***
+        $('#temp input[type="button"].active').removeClass('active');
+            $(this).addClass('active');
+    });
+    // *** end temp form ***
 
 
+    // *** start lighting form ***
+    $('#lighting > input[type="button"]').click(function(){
+        console.log("a lighting button pressed");
+        event.preventDefault();
 
-// *** start noise form ***
-$('#noise > input[type="button"]').click(function(){
-	console.log("a noise button pressed");
-	event.preventDefault();
-
-    $('#noise input[type="button"].active').removeClass('active');
-        $(this).addClass('active');
-});
-// *** end noise form ***
+        $('#lighting input[type="button"].active').removeClass('active');
+            $(this).addClass('active');
+    });
+    // *** end lighting form ***
 
 
-// *** start activity form ***
-$('#activity > input[type="button"]').click(function(){
-	console.log("an activity button pressed");
-	event.preventDefault();
+    // *** start noise form ***
+    $('#noise > input[type="button"]').click(function(){
+        console.log("a noise button pressed");
+        event.preventDefault();
 
-    $('#activity input[type="button"].active').removeClass('active');
-        $(this).addClass('active');
-});
-// *** start temp form ***
+        $('#noise input[type="button"].active').removeClass('active');
+            $(this).addClass('active');
+    });
+    // *** end noise form ***
+
+
+    // *** start activity form ***
+    $('#activity > input[type="button"]').click(function(){
+        console.log("an activity button pressed");
+        event.preventDefault();
+
+        $('#activity input[type="button"].active').removeClass('active');
+            $(this).addClass('active');
+    });
+    // *** start temp form ***
+// *** end read out activity states ***
 
 
 
 
 
 // *** start submit function ***
-$('.submitButton').click(function(){
-	console.log("submitButton clicked");
-    
-    if(PushbotsPlugin.isiOS()){
-        console.log("pushbots isios");
-        PushbotsPlugin.initializeiOS("5609620b1779591b758b4567");
-    }
-
-    
-    // *** start add values of all active buttons and UID to globalData ***
-    $(".active").each( function () {
-        console.log( $(this).parent().attr("id"));
-		console.log( $(this).attr("val") );
-                
-        var nameU = $(this).parent().attr("id");
-        var valueU = $(this).attr("val");
+    $('.submitButton').click(function(){
+        console.log("submitButton clicked");
         
-        addToGlobal(nameU, valueU);
-	});
-    
-    // adds UID to globalData
-    var appUID = window.localStorage.getItem('appUID');
-    addToGlobal("appID", appUID);
-    // *** end add values of all active buttons to globalData ***
-    
-    
-    
-    
-    
-    
-    
-    // *** start adding activity values to localstorage ***
-    
-    
-    console.log("localvar: " + window.localStorage.getItem('Reading') );
-
-
-    activityVal = globalData.activity;
-    console.log("Act: " + activityVal);
-    
-    if (activityVal == "reading") {
-        console.log("activityVal: reading");
-        var readingInt = parseInt(window.localStorage.getItem('Reading'));
-        console.log("readingInt: " + readingInt);
-        var readingIntNew = readingInt + 1;
-        window.localStorage.setItem('Reading', readingIntNew);
-        console.log("localvar reading new: " + window.localStorage.getItem('Reading') );
+        if(PushbotsPlugin.isiOS()){
+            console.log("pushbots isios");
+            PushbotsPlugin.initializeiOS("5609620b1779591b758b4567");
+        }
         
-    } else if (activityVal == "computer") {
-        console.log("activityVal: computer");
-        var computerInt = parseInt(window.localStorage.getItem('Computer'));
-        console.log("computerInt: " + computerInt);
-        var computerIntNew = computerInt + 1;
-        window.localStorage.setItem('Computer', computerIntNew);
-        console.log("localvar computer new: " + window.localStorage.getItem('Computer') );
-    
-    } else if (activityVal == "meeting") {
-        console.log("activityVal: meeting");
-        var meetingInt = parseInt(window.localStorage.getItem('Meeting'));
-        console.log("meetingInt: " + meetingInt);
-        var meetingIntNew = meetingInt + 1;
-        window.localStorage.setItem('Meeting', meetingIntNew);
-        console.log("localvar meeting new: " + window.localStorage.getItem('Meeting') );
-    
-    } else if (activityVal == "moving") {
-        console.log("activityVal: moving");
-        var movingInt = parseInt(window.localStorage.getItem('Moving'));
-        console.log("movingInt: " + movingInt);
-        var movingIntNew = movingInt + 1;
-        window.localStorage.setItem('Moving', movingIntNew);
-        console.log("localvar moving new: " + window.localStorage.getItem('Moving') );
-    
-    } else {
-        console.log("activityVal: other");
-        var otherInt = parseInt(window.localStorage.getItem('Other'));
-        console.log("otherInt: " + otherInt);
-        var otherIntNew = otherInt + 1;
-        window.localStorage.setItem('Other', otherIntNew);
-        console.log("localvar other new: " + window.localStorage.getItem('Other') );
-    }
-
-
-
-
-    // *** end adding activity values to localstorage ***
-    
-    
-
-
-
-
-
-    
-    // *** start define sensor functions ***
-    
-        function onSuccessLight(result) {
-            addToGlobal("LightS", result);
+        // *** start save last input state of buttons ***
+        
+        function addToState(name, value) {
+            window.localStorage.setItem(name, value);
+            console.log("localstorage noise state: " + window.localStorage.getItem('noise'));
         };
+  
+        // *** end save last input state of buttons ***
+        
+        
+        
+        
+        
 
-        function onSuccessNoise(result) {
-            addToGlobal("NoiseS", result);
-            // sending data in callback
-            sendData();
-
-        };
         
-        function getNoise() {
-            carrier.getAverageNoise(onSuccessNoise, onFailure);
-        }
-        
-        function getLighting() {
-            carrier.getLuminosity(onSuccessLight, onFailure);
-        }
-    
-    // *** end define sensor functions ***
-    
-    
-    
-    // *** start local database ***
-    
-        function addGlobalToLocalDB() {
-        
-            /*var currentdate = new Date();
-                var datetime = currentdate.getDate() + "/"
-                    + (currentdate.getMonth()+1)  + "/"
-                    + currentdate.getFullYear() + " "
-                    + currentdate.getHours() + ":"  
-                    + currentdate.getMinutes() + ":" 
-                    + currentdate.getSeconds();
+        // *** start add values of all active buttons and UID to globalData ***
+        $(".active").each( function () {
+            console.log("active.each parent: " + $(this).parent().attr("id"));
+            console.log("active.each val: " + $(this).attr("val") );
                     
-            addToGlobal("date", currentdate);*/
+            var nameU = $(this).parent().attr("id");
+            var valueU = $(this).attr("val");
             
-            // *** start sql database ***
-                // create db with approx 10mb of storage
-                var db = window.openDatabase("localDB", "1.0", "Local DB", 10000000);
-                db.transaction(runTransaction, errorDB, successDB);
+            addToGlobal(nameU, valueU);
+            addToState(nameU, valueU);
+        });
+        
+        // adds UID to globalData
+        var appUID = window.localStorage.getItem('appUID');
+        addToGlobal("appID", appUID);
+        // *** end add values of all active buttons to globalData ***
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+        // *** start adding activity values to localstorage ***
+        
+        
+        console.log("localvar: " + window.localStorage.getItem('Reading') );
+
+
+        activityVal = globalData.activity;
+        console.log("Act: " + activityVal);
+        
+        if (activityVal == "reading") {
+            console.log("activityVal: reading");
+            var readingInt = parseInt(window.localStorage.getItem('Reading'));
+            console.log("readingInt: " + readingInt);
+            var readingIntNew = readingInt + 1;
+            window.localStorage.setItem('Reading', readingIntNew);
+            console.log("localvar reading new: " + window.localStorage.getItem('Reading') );
+            
+        } else if (activityVal == "computer") {
+            console.log("activityVal: computer");
+            var computerInt = parseInt(window.localStorage.getItem('Computer'));
+            console.log("computerInt: " + computerInt);
+            var computerIntNew = computerInt + 1;
+            window.localStorage.setItem('Computer', computerIntNew);
+            console.log("localvar computer new: " + window.localStorage.getItem('Computer') );
+        
+        } else if (activityVal == "meeting") {
+            console.log("activityVal: meeting");
+            var meetingInt = parseInt(window.localStorage.getItem('Meeting'));
+            console.log("meetingInt: " + meetingInt);
+            var meetingIntNew = meetingInt + 1;
+            window.localStorage.setItem('Meeting', meetingIntNew);
+            console.log("localvar meeting new: " + window.localStorage.getItem('Meeting') );
+        
+        } else if (activityVal == "moving") {
+            console.log("activityVal: moving");
+            var movingInt = parseInt(window.localStorage.getItem('Moving'));
+            console.log("movingInt: " + movingInt);
+            var movingIntNew = movingInt + 1;
+            window.localStorage.setItem('Moving', movingIntNew);
+            console.log("localvar moving new: " + window.localStorage.getItem('Moving') );
+        
+        } else {
+            console.log("activityVal: other");
+            var otherInt = parseInt(window.localStorage.getItem('Other'));
+            console.log("otherInt: " + otherInt);
+            var otherIntNew = otherInt + 1;
+            window.localStorage.setItem('Other', otherIntNew);
+            console.log("localvar other new: " + window.localStorage.getItem('Other') );
+        }
+
+
+
+
+        // *** end adding activity values to localstorage ***
+        
+        
+
+
+
+
+
+        
+        // *** start define sensor functions ***
+        
+            function onSuccessLight(result) {
+                addToGlobal("LightS", result);
+            };
+
+            function onSuccessNoise(result) {
+                addToGlobal("NoiseS", result);
+                // sending data in callback
+                sendData();
+
+            };
+            
+            function getNoise() {
+                carrier.getAverageNoise(onSuccessNoise, onFailure);
+            }
+            
+            function getLighting() {
+                carrier.getLuminosity(onSuccessLight, onFailure);
+            }
+        
+        // *** end define sensor functions ***
+        
+        
+        
+        // *** start local database ***
+        
+            function addGlobalToLocalDB() {
+            
+                /*var currentdate = new Date();
+                    var datetime = currentdate.getDate() + "/"
+                        + (currentdate.getMonth()+1)  + "/"
+                        + currentdate.getFullYear() + " "
+                        + currentdate.getHours() + ":"  
+                        + currentdate.getMinutes() + ":" 
+                        + currentdate.getSeconds();
+                        
+                addToGlobal("date", currentdate);*/
                 
-                
-                    var noiseUdb = globalData.noise;
-                    var lightUdb = globalData.lighting;
-                    var noiseSdb = globalData.NoiseS;
-                    var lightSdb = globalData.LightS;
+                // *** start sql database ***
+                    // create db with approx 10mb of storage
+                    var db = window.openDatabase("localDB", "1.0", "Local DB", 10000000);
+                    db.transaction(runTransaction, errorDB, successDB);
                     
-                    console.log("DB ready values: " + noiseUdb + ' ' + lightUdb + ' ' + lightSdb + ' ' + noiseSdb);
-                
-                
-                    function runTransaction(t){
-                        t.executeSql('CREATE TABLE IF NOT EXISTS comfort (id unique, noiseS, noiseU, lightS, lightU, date)');
-                        t.executeSql("INSERT INTO comfort (noiseU, lightU, noiseS, lightS) VALUES ("+noiseUdb+", "+lightUdb+", "+noiseSdb+", "+lightSdb+")");
-                    }
-                    function errorDB(err){
-                        console.log('Error creating tables: '+err);
-                    }
-                    function successDB(){
-                        console.log('Successfully created tables');
-                        window.location.href="question.html";
-                    }
+                    
+                        var noiseUdb = globalData.noise;
+                        var lightUdb = globalData.lighting;
+                        var noiseSdb = globalData.NoiseS;
+                        var lightSdb = globalData.LightS;
+                        
+                        console.log("DB ready values: " + noiseUdb + ' ' + lightUdb + ' ' + lightSdb + ' ' + noiseSdb);
+                    
+                    
+                        function runTransaction(t){
+                            t.executeSql('CREATE TABLE IF NOT EXISTS comfort (id unique, noiseS, noiseU, lightS, lightU, date)');
+                            t.executeSql("INSERT INTO comfort (noiseU, lightU, noiseS, lightS) VALUES ("+noiseUdb+", "+lightUdb+", "+noiseSdb+", "+lightSdb+")");
+                        }
+                        function errorDB(err){
+                            console.log('Error creating tables: '+err);
+                        }
+                        function successDB(){
+                            console.log('Successfully created tables');
+                            window.location.href="question.html";
+                        }
 
-        
-            // *** end sql database ***
             
+                // *** end sql database ***
+                
+            
+            }
+        // *** end local databse ***
+       
         
-        }
-    // *** end local databse ***
-   
-    
-    // *** start sensor data ***
+        // *** start sensor data ***
 
-    getNoise();
-    getLighting();
-    
-    function sendData() {
-        try {
-            sendAppID();
-            sendActivity();
-            sendNoise();
-            sendLighting();
-            sendTemp();
-            sendNoiseS();
-            sendLightS();
-            //sendJSON();
-            addGlobalToLocalDB();
-            PushbotsPlugin.tag("roman");
+        getNoise();
+        getLighting();
+        
+        function sendData() {
+            try {
+                sendAppID();
+                sendActivity();
+                sendNoise();
+                sendLighting();
+                sendTemp();
+                sendNoiseS();
+                sendLightS();
+                //sendJSON();
+                addGlobalToLocalDB();
+                // adds tag to the app
+                PushbotsPlugin.tag("roman");
+            }
+            catch(err) {
+                alert("There seems to be a problem with the connection to the Server! Please connect to the internet an restart the app.");
+            }
         }
-        catch(err) {
-            alert("There seems to be a problem with the connection to the Server! Please connect to the internet an restart the app.");
-        }
-    }
-    
-    // *** end sensor data ***
-    
-
-
-});
+        
+        // *** end sensor data ***
+    });
 // *** end submit function ***
                   
+
 
 // *** start pushbot initialization ***
 
