@@ -47,6 +47,10 @@ $(document).ready(function() {
         //String - A legend template
         legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
     }
+    
+    var pieOptions = {
+        //animation : false,
+    }
 
 
 
@@ -89,7 +93,7 @@ $(document).ready(function() {
                 console.log("Userarray: " + noiseUarray);
                 var noiseLineChart = new Chart(ctx).Line(noiseData, options);
                 var lightLineChart = new Chart(ctx2).Line(lightData, options);
-                var activityPiechart = new Chart(ctx3).Pie(activityData);
+                var activityPiechart = new Chart(ctx3).Pie(activityData, pieOptions);
                 
                 
             } else {
@@ -109,7 +113,7 @@ $(document).ready(function() {
                 console.log("Userarray: " + noiseUarray);
                 var noiseLineChart = new Chart(ctx).Line(noiseData, options);
                 var lightLineChart = new Chart(ctx2).Line(lightData, options);
-                var activityPiechart = new Chart(ctx3).Pie(activityData);
+                var activityPiechart = new Chart(ctx3).Pie(activityData, pieOptions);
                 
             }
         }

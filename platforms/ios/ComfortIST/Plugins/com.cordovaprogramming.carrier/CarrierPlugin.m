@@ -35,8 +35,9 @@
         float averageNS = [recorder averagePowerForChannel:0];
         // convert power level into linar range
         double percentage = pow (10, (0.05 * averageNS));
+        double percentageRounded = round (percentage * 100) / 100.0;
         
-        NSString *averageString = [NSString stringWithFormat:@"%f", percentage];
+        NSString *averageString = [NSString stringWithFormat:@"%f", percentageRounded];
         
         CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                     messageAsString: averageString];
