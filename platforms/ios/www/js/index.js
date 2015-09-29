@@ -28,8 +28,8 @@ function onResume() {
 
 
 
-//$(document).ready(function() {
-document.addEventListener("deviceready", function(){
+$(document).ready(function() {
+//document.addEventListener("deviceready", function(){
     // establish mqtt connection to server
     initClient();
     
@@ -370,7 +370,24 @@ document.addEventListener("deviceready", function(){
         // *** end sensor data ***
     });
 // *** end submit function ***
+
+
+// *** start help button function ***
                   
+$('#help').click(function() {
+    var overlay = jQuery('<div id="overlay"> <h3>FAQ</h3><p>Hello hello hello</p></div>');
+    overlay.appendTo(document.body);
+    
+    //removes the overlay on click
+    $('#overlay').click(function() {
+        $('#overlay').remove();
+    });
+});
+
+
+
+// *** end help button function ***
+
 
 
 // *** start pushbot initialization ***

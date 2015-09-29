@@ -99,7 +99,7 @@ baseFormScales,
 .submitButton {
     float: left;
     height: 50px;
-    width: 310px;
+    width: 270px;
     margin-top: 9px;
     color: white;
     border-radius: 3px;
@@ -119,6 +119,45 @@ baseFormScales,
       transition: none;
       opacity: 0.2;
 }
+
+#help {
+    float: right;
+    height: 50px;
+    width: 35px;
+    margin-top: 9px;
+    color: white;
+    border-radius: 3px;
+    margin-right: 5px;
+    background-color: rgba(24,103,194,0.81);
+    background-repeat: no-repeat;
+    background-position: 20px 10px;  
+    vertical-align: middle;
+}
+
+/* start overlay for help page */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 10000;
+}
+
+#overlay p {
+    color: white;
+}
+
+#overlay h3 {
+    color: white;
+    text-align: center;
+}
+
+
+
+
+/* end overlay for help page*/
 
 
 input {
