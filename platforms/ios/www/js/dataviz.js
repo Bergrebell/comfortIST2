@@ -113,7 +113,7 @@ $(document).ready(function() {
                 console.log("NoiseSensorArray: "+ noiseSarray);
                 console.log("NoiseUserArray: " + noiseUarray);
                 var noiseLineChart = new Chart(ctx).Line(noiseData, options);
-                    legend(document.getElementById("lineLegend"), noiseData);
+                    //legend(document.getElementById("lineLegend"), noiseData);
                 var lightLineChart = new Chart(ctx2).Line(lightData, options);
                 var activityPiechart = new Chart(ctx3).Pie(activityData, pieOptions);
                 

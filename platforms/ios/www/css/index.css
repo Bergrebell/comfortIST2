@@ -240,9 +240,43 @@ baseCanvas,
     padding-top: 5px;
 }
 
-#activityCanvas {
-    float: left;
+.qHeading {
+    margin-top: 5px;
 }
+
+#activityCanvas {
+}
+
+#noiseLegend,
+#lightLegend {
+    position: relative;
+    margin-top: -20px;
+    text-align: right;
+}
+
+legendBaseclass,
+.legendOne,
+.legendTwo {
+    position: relative;
+    display: inline;
+    font-size: 10pt;
+    font-weight: normal;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 3px;
+}
+
+.legendOne {
+    color: rgba(151,187,205,1);
+}
+
+.legendTwo {
+    color: grey;
+}
+
+
+
+
 
 
 
