@@ -128,9 +128,9 @@ baseFormScales,
     color: white;
     border-radius: 3px;
     margin-right: 5px;
-    background-color: rgba(24,103,194,0.81);
+    background-image: url(icons/menu48.png);
     background-repeat: no-repeat;
-    background-position: 20px 10px;  
+    background-position: 4px 11px;
     vertical-align: middle;
 }
 
@@ -280,6 +280,11 @@ baseActivityBox,
 }
 
 .submitButton {
+    height: 47px;
+    margin-top: 6px;
+}
+
+#help {
     height: 47px;
     margin-top: 6px;
 }

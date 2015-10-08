@@ -45,7 +45,8 @@ $(document).ready(function() {
         datasetFill : true,
 
         //String - A legend template
-        legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+        legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=5; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
     }
     
     var pieOptions = {
@@ -81,19 +82,19 @@ $(document).ready(function() {
                     console.log('Row: '+i);
                     console.log('Noise: '+results.rows.item(i).noiseU);
                     console.log('NoiseS: '+results.rows.item(i).noiseS);
-                    noiseUarray.push(results.rows.item(i).noiseU);
-                    noiseSarray.push(results.rows.item(i).noiseS*100);
+                    noiseUarray.push(results.rows.item(i).noiseU * 24);
+                    noiseSarray.push(results.rows.item(i).noiseS);
                     
                     console.log('Light: '+results.rows.item(i).lightU);
                     console.log('LightS: '+results.rows.item(i).lightS);
                     lightUarray.push(results.rows.item(i).lightU);
-                    lightSarray.push(results.rows.item(i).lightS*5);
+                    lightSarray.push(results.rows.item(i).lightS*4);
                 }
-                console.log("Senserarray: "+ noiseSarray);
-                console.log("Userarray: " + noiseUarray);
+                console.log("NoiseSensorArray: "+ noiseSarray);
+                console.log("NoiseUserArray: " + noiseUarray);
                 var noiseLineChart = new Chart(ctx).Line(noiseData, options);
-                var lightLineChart = new Chart(ctx2).Line(lightData, options);
                 var activityPiechart = new Chart(ctx3).Pie(activityData, pieOptions);
+                
                 
                 
             } else {
@@ -101,17 +102,18 @@ $(document).ready(function() {
                     console.log('Row: '+i);
                     console.log('Noise: '+results.rows.item(i).noiseU);
                     console.log('NoiseS: '+results.rows.item(i).noiseS);
-                    noiseUarray.push(results.rows.item(i).noiseU);
-                    noiseSarray.push(results.rows.item(i).noiseS*70);
+                    noiseUarray.push(results.rows.item(i).noiseU * 24);
+                    noiseSarray.push(results.rows.item(i).noiseS);
                     
                     console.log('Light: '+results.rows.item(i).lightU);
                     console.log('LightS: '+results.rows.item(i).lightS);
                     lightUarray.push(results.rows.item(i).lightU);
-                    lightSarray.push(results.rows.item(i).lightS*5);
+                    lightSarray.push(results.rows.item(i).lightS*4);
                 }
-                console.log("Senserarray: "+ noiseSarray);
-                console.log("Userarray: " + noiseUarray);
+                console.log("NoiseSensorArray: "+ noiseSarray);
+                console.log("NoiseUserArray: " + noiseUarray);
                 var noiseLineChart = new Chart(ctx).Line(noiseData, options);
+                    legend(document.getElementById("lineLegend"), noiseData);
                 var lightLineChart = new Chart(ctx2).Line(lightData, options);
                 var activityPiechart = new Chart(ctx3).Pie(activityData, pieOptions);
                 
