@@ -375,7 +375,19 @@ $(document).ready(function() {
 // *** start help button function ***
                   
 $('#help').click(function() {
-    var overlay = jQuery('<div id="overlay"> <h3>About the App</h3><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>');
+    var overlay = jQuery('<div id="overlay">\
+                            <h3>Instructions</h3>\
+                                <p>The purpose of the survey is to find out if there\'s a relationship between objective data measured by the built in smartphone sensors and the perceived comfort. To collect this data you are asked several times a day to fill out a small form. This happens via push notifications on your smartphone. If you take part in the survey please keep the following points in mind:</p>\
+                                 <ul>\
+                                  <li>If you\'ve missed a single notification please answer as soon as you can. If you\'ve missed more then one notification please only answer once.</li>\
+                                  <li>To gather objective information the application needs to collect data from the built-in sensors. Therefore it accesses the luminosity sensor and the microphone. This information, together with the data entered into the form, is sent to a server.</li>\
+                                  <li>To participate in the experiment it\'s important that you\'ve turned on the Auto-Brightness feature of your iPhone and that you\'ve enabled Push Notifications. The app also needs the permission to access the microphone. No audio files are saved or sent from the app. The microphone only measures the sound pressure.</li>\
+                                  <li>As soon as you\'ve pressed the submit button you get prompted to a page with a small visualization of the data you\'ve entered so far. You can leave the app at any time by pressing the home button.</li>\
+                                  <li>Please disable the Vibration mode and set the volume to an adequate level so that you will notice if you\'ve received a push notification. </li>\
+                                  <li>The application sends push notifications from 8 AM to 7 PM for two days. If you like leave the experiment just delete the application from your device.</li>\
+                                  <li>If you have any questions please feel free to write an email to romanrick.kuepper@unifr.ch.</li>\
+                                </ul>\
+                          </div>');
     overlay.appendTo(document.body);
     
     //removes the overlay on click
