@@ -72,6 +72,20 @@ $(document).ready(function() {
     if(applaunchCount){
 
        //This is a second time launch, and count = applaunchCount
+       
+        // *** start prompt box to set tag name ***
+
+        if (localStorage.getItem('tagName') === "null") {
+            console.log("tagname === null");
+            var tagName = prompt("Please enter your first name", "eg Peter");
+            window.localStorage.setItem('tagName', tagName);
+        }else{
+            console.log("tagname not empty!?");
+        }
+        
+        // *** end prompt box to set tag name ***
+
+        
        console.log("second time app launch");
        var appUID = window.localStorage.getItem('appUID');
        console.log("Old AppID: "+ appUID);
@@ -81,9 +95,10 @@ $(document).ready(function() {
     }else{
         //Local storage is not set, hence first time launch. set the local storage item
         
-        // *** start prompt box to set tag name ***
-            var tagName = prompt("Please enter your first name", "eg Peter");
-        // *** end prompt box to set tag name ***
+        // *** start prompt box if tagName is not set ***
+        var tagName = prompt("Please enter your first name", "eg Peter");
+        window.localStorage.setItem('tagName', tagName);
+        // *** end prompt box if tagName is not set ***
         
         window.localStorage.setItem('launchCount5',1);
         window.localStorage.setItem('Reading', 0);
@@ -366,7 +381,8 @@ $(document).ready(function() {
                 //sendJSON();
                 addGlobalToLocalDB();
                 // adds tag to the app
-                PushbotsPlugin.tag(tagName);
+                console.log("tagName on sendData(): " + window.localStorage.getItem('tagName'));
+                PushbotsPlugin.tag(window.localStorage.getItem('tagName'));
             }
             catch(err) {
                 alert("There seems to be a problem with the connection to the Server! Please connect to the internet an restart the app.");
