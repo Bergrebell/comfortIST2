@@ -70,6 +70,7 @@ $(document).ready(function() {
 
     //Check if it already exists or not
     if(applaunchCount){
+
        //This is a second time launch, and count = applaunchCount
        console.log("second time app launch");
        var appUID = window.localStorage.getItem('appUID');
@@ -78,13 +79,18 @@ $(document).ready(function() {
 
        
     }else{
-      //Local storage is not set, hence first time launch. set the local storage item
-      window.localStorage.setItem('launchCount5',1);
-      window.localStorage.setItem('Reading', 0);
-      window.localStorage.setItem('Computer', 0);
-      window.localStorage.setItem('Meeting', 0);
-      window.localStorage.setItem('Moving', 0);
-      window.localStorage.setItem('Other', 0);
+        //Local storage is not set, hence first time launch. set the local storage item
+        
+        // *** start prompt box to set tag name ***
+            var tagName = prompt("Please enter your first name", "eg Peter");
+        // *** end prompt box to set tag name ***
+        
+        window.localStorage.setItem('launchCount5',1);
+        window.localStorage.setItem('Reading', 0);
+        window.localStorage.setItem('Computer', 0);
+        window.localStorage.setItem('Meeting', 0);
+        window.localStorage.setItem('Moving', 0);
+        window.localStorage.setItem('Other', 0);
       
       console.log("first time app launch");
       
@@ -360,7 +366,7 @@ $(document).ready(function() {
                 //sendJSON();
                 addGlobalToLocalDB();
                 // adds tag to the app
-                PushbotsPlugin.tag("roman");
+                PushbotsPlugin.tag(tagName);
             }
             catch(err) {
                 alert("There seems to be a problem with the connection to the Server! Please connect to the internet an restart the app.");
@@ -389,6 +395,7 @@ $('#help').click(function() {
                                 </ul>\
                           </div>');
     overlay.appendTo(document.body);
+    
     
     //removes the overlay on click
     $('#overlay').click(function() {
