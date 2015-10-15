@@ -48,6 +48,7 @@
       <param name="ios-package" value="CDVAccelerometer" />
     </feature>
     <!-- DisallowOverscroll verhindert das "schwimmen" der app - scrollen über die apphoehe hinaus -->
+    <preference name="webviewbounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     
     <icon src="icon.png" />

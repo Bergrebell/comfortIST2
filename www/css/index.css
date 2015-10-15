@@ -140,9 +140,14 @@ baseFormScales,
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
+    height: 600px;
     background-color: rgba(0,0,0,0.8);
     z-index: 10000;
+    
+    overflow: hidden;
+    overflow-y: scroll !important;
+    -webkit-overflow-scrolling: touch;
 }
 
 #overlay p {
@@ -152,6 +157,23 @@ baseFormScales,
 #overlay h3 {
     color: white;
     text-align: center;
+}
+
+#overlay ul {
+    overflow: scroll;
+    margin-bottom: 20px;
+    padding-bottom: 30px;
+}
+
+
+#overlay li {
+    font-family: Verdana, arial, sans-serif;    
+    font-size: 10pt;
+    font-weight: bold;
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: white;
 }
 
 
